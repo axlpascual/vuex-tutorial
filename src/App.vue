@@ -1,28 +1,60 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav 
+      v-if="hideNav"
+      class="navbar navbar-light bg-light"
+    >
+      <div class="container-fluid">
+        <div class="row col g-3 px-3">
+          <div 
+            class="col"
+          >
+            <router-link
+              to="/home"
+              v-text="'Home'"
+              class="btn btn-light me-3"
+            />
+            <router-link
+              to="/posts"
+              v-text="'Posts'"
+              class="btn btn-light me-3"
+            />
+          </div>
+          <div class="col-auto">
+            <router-link
+              to="/add"
+              v-text="'Add Post'"
+              class="btn btn-primary"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <router-view></router-view>
+    </div>
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  mounted() {
+      this.$store.dispatch('fetchPosts');
+  },
+  computed: {
+    routes() {
+      return this.$router.options.routes;
+    },
+    hideNav() {
+      return this.$route.name != 'Login';
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
