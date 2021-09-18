@@ -1,7 +1,7 @@
 <template>
     <div class="home p-3">
         <h1>Home</h1>
-        <p>Hello user!</p>
+        <p>Welcome user!</p>
         <button
             class="btn btn-light"
             v-text="'Logout'"
